@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>To Do App</title>
+	<style>
+		button {
+			margin-left: 10px;
+		}
+	</style>
+</head>
+<body>
+
+<h1>To Do List</h1>
+
+<form>
+	<input type="text" name="todo" id="todo">
+	<input type="submit" value="Add Item">
+</form>
+
+<ul id="list">
+</ul>
+
+<script>
+
+// https://github.com/rithmschool/intermediate_javascript_solutions/blob/master/todo_exercise/script.js
+
+window.onload = function(){
+	
+	var form = document.querySelector('form');
+	var ul = document.getElementById('list');
+	var item = document.getElementById('todo');
+
+	// var savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+	// for (var i = 0; i < savedTodos.length; i++){
+	// 	var newTodo = document.createElement('li');
+	// 	newTodo.innerText = savedTodos[i].task;
+	// 	ul.appendChild(newTodo);
+
+	// }
+	
+	form.addEventListener('submit', function(e){
+		e.preventDefault();
+
+		var newLi = document.createElement('li');
+		newLi.innerHTML = item.value + "<button id='removeTodo'>X</button>";
+		
+		ul.appendChild(newLi);
+		item.value = "";
+
+		//save to localStorage;
+		// savedTodos.push({
+		// 	task: newLi.innerText
+		// });
+		// localStorage.setItem('todos', JSON.stringify(savedTodos));
+	});
+
+	ul.addEventListener('click', function(e){
+		if (e.target.nodeName === 'LI'){
+			e.target.style.textDecoration = 'line-through';
+		}
+		if (e.target.nodeName === 'BUTTON'){
+			e.target.parentNode.remove();
+		}
+	})
+}
+
+</script>
+</body>
+</html>

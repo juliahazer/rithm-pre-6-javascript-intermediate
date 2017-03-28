@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Race Cars</title>
+	<style type="text/css">
+
+		body {
+			padding: 0;
+			margin: 0;
+			font-family: 'Georgia' serif;
+		}
+
+		.track {
+			padding: 20px 0;
+			background-color: LightGray;
+		}
+
+		#car1 {
+			background-color: Crimson;
+		}
+
+		#car2 {
+			margin-top: 20px;
+			margin-bottom: 20px;
+			background-color: DodgerBlue;
+		}
+
+		.car {
+			margin-left: 5px;
+			border: 3px solid black;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 25px;
+			border-bottom-right-radius: 4px;
+			height: 20px;
+			width: 80px;
+			text-align: center;
+		}
+
+		.wheelBack {
+			position: relative;
+			margin-top: -5px;
+			width: 15px;
+			height: 15px;
+			border-radius: 50%;
+			background-color: black;
+		}
+
+		.num {
+			position: relative;
+			font-weight: bolder;
+			width: 20px;
+			margin-left: 25px;
+			margin-top: -25px;
+			height: 15px;
+		}
+
+		.wheelFront {
+			position: relative;
+			margin-top: 13px;
+			margin-left: 60px;
+			width: 15px;
+			height: 15px;
+			border-radius: 50%;
+			background-color: black;
+		}
+
+		.carWin {
+			animation: moveCar 4s ease-in;
+		}
+
+		.carLose {
+			animation: moveCar 6s ease-out;
+		}
+
+		@keyframes moveCar {
+			0% {
+				transform: translate(0);
+			}
+
+			100% {
+				transform: translate(100vw);
+			}
+		}
+
+		button {
+			margin-left: 15px;
+			margin-top: 20px;
+			font-size: 20px;
+		}
+
+		.winnerMsg {
+			display: inline-block;
+			margin-left: 20px;
+			margin-top: 10px;
+			font-size: 20px;
+			font-weight: bolder;
+		}
+
+	</style>
+</head>
+<body>
+
+<div class="track">
+	<div id="car1" class="car"><div class="wheelFront"></div><div class="num">#1</div><div class="wheelBack"></div></div>
+
+	<div id="car2" class="car"><div class="wheelFront"></div><div class="num">#2</div><div class="wheelBack"></div></div>
+</div>
+
+<div>
+	<button id="race">Race!</button>
+
+	<div class="winnerMsg"></div>
+
+</div>
+
+<script>
+
+	window.onload = function() {
+	
+		document.querySelector('#race').addEventListener('click', function(){
+			var winMsg = document.querySelector('.winnerMsg');
+			winMsg.innerHTML = '';
+			var winCarNum = 1;
+			var car1 = document.getElementById('car1');
+			var car2 = document.getElementById('car2');
+
+			var carWin = car1;
+			var carLose = car2;
+
+			var num = Math.round(Math.random());
+			if (num === 1){
+				winCarNum = 2;
+				carWin = car2;
+				carLose = car1;
+			}
+
+			carWin.classList.add('carWin');
+			carLose.classList.add('carLose');
+			setTimeout(function(){
+				winMsg.innerHTML = "The winner was car #" + winCarNum + "!";
+				carWin.className = 'car';
+				carLose.className = 'car';
+			},5000);
+		});
+
+	}
+
+</script>	
+</body>
+</html>
